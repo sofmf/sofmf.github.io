@@ -1,0 +1,30 @@
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    padding: 20px; /* Povečana višina menijske vrstice */
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    margin: 0 20px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 20px; /* Večja pisava menijskih elementov */
+}
+
+.logo {
+    height: 70px; /* Povečan logotip */
+    margin-right: 30px;
+}
