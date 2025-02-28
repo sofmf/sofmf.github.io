@@ -48,7 +48,7 @@ FMF has two representatives in the Student Assembly of ŠOU v Ljubljani, who adv
     
 
 
-    <footer style="position: fixed; bottom: 0; width: 100%; background: #333; color: white; text-align: center; padding: 0px;">
+    <footer style="position: fixed; bottom: 0; background: #333; color: white; text-align: center; padding: 0px;">
       <p>Current Date and Time: <span id="datetime">Loading...</span></p>
       <p>Global Visitor Count: <span id="visitor-count">Loading...</span></p>
     </footer>
@@ -74,10 +74,21 @@ FMF has two representatives in the Student Assembly of ŠOU v Ljubljani, who adv
   
       // Display current date and time
       function updateDateTime() {
-        const date = new Date();
-        document.getElementById('datetime').textContent = date.toLocaleString();
+        const now = new Date();
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+        const year = now.getFullYear();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        const europeanFormat = `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
+        document.getElementById('datetime').textContent = europeanFormat;
       }
+
       setInterval(updateDateTime, 1000);
+      updateDateTime(); // Run immediately
+
   
       // Update visitor count in Firestore
       function updateVisitorCount() {
