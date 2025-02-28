@@ -6,6 +6,10 @@
     <title>ŠOFMF</title>
     <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
     <link rel="icon" href="300577316_444586151027828_3521210754049965520_n.jpg" type="image/x-icon">
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js"></script>
+
 </head>
 <body>
     <header>
@@ -51,29 +55,45 @@ FMF has two representatives in the Student Assembly of ŠOU v Ljubljani, who adv
 
 
     <script>
-        // Display current date and time
-        function updateDateTime() {
-          const date = new Date();
-          const formattedDate = date.toLocaleString();
-          document.getElementById('datetime').textContent = formattedDate;
-        }
-    
-        // Call the function to update the date and time every second
-        setInterval(updateDateTime, 1000);
-    
-        // Set visitor count
-        function updateVisitorCount() {
-          // Fetch visitor count from a server-side script (e.g., PHP, Node.js)
-          fetch('visitor-counter.php') // This PHP file will handle the count increment
-            .then(response => response.json())
-            .then(data => {
-              document.getElementById('visitor-count').textContent = data.count;
-            });
-        }
-    
-        // Call function to update visitor count on page load
-        updateVisitorCount();
-      </script>
+      // Initialize Firebase
+      const firebaseConfig = {
+    apiKey: "AIzaSyCEMfa1LbsrUgriUcJvIdHgvwMLCY_4_Zk",
+    authDomain: "visitor-counter-efe06.firebaseapp.com",
+    projectId: "visitor-counter-efe06",
+    storageBucket: "visitor-counter-efe06.firebasestorage.app",
+    messagingSenderId: "840136402073",
+    appId: "1:840136402073:web:bcd0bbce9b85e30f5b0408",
+    measurementId: "G-WCV8LCS2N5"
+  };
+      
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+  
+      // Display current date and time
+      function updateDateTime() {
+        const date = new Date();
+        document.getElementById('datetime').textContent = date.toLocaleString();
+      }
+      setInterval(updateDateTime, 1000);
+  
+      // Update visitor count in Firestore
+      function updateVisitorCount() {
+        const docRef = db.collection("visitors").doc("count");
+  
+        docRef.get().then((doc) => {
+          let count = doc.exists ? doc.data().count : 0;
+          count++;
+  
+          docRef.set({ count })
+            .then(() => {
+              document.getElementById('visitor-count').textContent = count;
+            })
+            .catch((error) => console.error("Error updating count:", error));
+        });
+      }
+  
+      updateVisitorCount();
+    </script>
 
 </body>
 </html>
