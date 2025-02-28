@@ -42,5 +42,37 @@ FMF has two representatives in the Student Assembly of ŠOU v Ljubljani, who adv
     </section>
     
 
+
+    <p>Current Date and Time: <span id="datetime"></span></p>
+
+    <h3>Visitor Count: <span id="visitor-count">Loading...</span></h3>
+
+
+
+    <script>
+        // Display current date and time
+        function updateDateTime() {
+          const date = new Date();
+          const formattedDate = date.toLocaleString();
+          document.getElementById('datetime').textContent = formattedDate;
+        }
+    
+        // Call the function to update the date and time every second
+        setInterval(updateDateTime, 1000);
+    
+        // Set visitor count
+        function updateVisitorCount() {
+          // Fetch visitor count from a server-side script (e.g., PHP, Node.js)
+          fetch('visitor-counter.php') // This PHP file will handle the count increment
+            .then(response => response.json())
+            .then(data => {
+              document.getElementById('visitor-count').textContent = data.count;
+            });
+        }
+    
+        // Call function to update visitor count on page load
+        updateVisitorCount();
+      </script>
+
 </body>
 </html>
