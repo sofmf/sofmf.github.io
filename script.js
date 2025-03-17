@@ -1,22 +1,26 @@
-// Base64 encoded API key
-const encodedApiKey = "QUIGYVNSQ9VNYmJHMWxzCLVncnRSVXMS0XpNTkLX4"; // Replace with your Base64 encoded key
 
-// Decode it when needed
-const apiKey = atob(encodedApiKey);
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Firebase initialization
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: apiKey, // Use the decoded key
-    authDomain: "Visitor-counter-efe06.firebaseapp.com",
-    projectId: "Visitor-counter-efe06",
-    storageBucket: "Visitor-counter-efe06.appspot.com",
-    messagingSenderId: "840136402073",
-    appId: "1:840136402073:web:bcc0bbcc9b85c30f5b0408",
-    measurementId: "G-WCV8LC52NS"
+  apiKey: "AIzaSyCEMfa1LbsrUgriUcJvIdHgvwMLCY_4_Zk",
+  authDomain: "visitor-counter-efe06.firebaseapp.com",
+  projectId: "visitor-counter-efe06",
+  storageBucket: "visitor-counter-efe06.firebasestorage.app",
+  messagingSenderId: "840136402073",
+  appId: "1:840136402073:web:bcd0bbce9b85e30f5b0408",
+  measurementId: "G-WCV8LCS2N5"
 };
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = app.firestore();
 
 // Display current date and time
 function updateDateTime() {
