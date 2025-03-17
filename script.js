@@ -1,5 +1,5 @@
 // Base64 encoded API key
-const encodedApiKey = "QUl6YVN5Q0VNYmJhMWxzclVncnR5VXN5QXpMTklX4"; // Replace with your Base64 encoded key
+const encodedApiKey = "QUIGYVNSQ9VNYmJHMWxzCLVncnRSVXMS0XpNTkLX4"; // Replace with your Base64 encoded key
 
 // Decode it when needed
 const apiKey = atob(encodedApiKey);
@@ -7,12 +7,12 @@ const apiKey = atob(encodedApiKey);
 // Firebase initialization
 const firebaseConfig = {
     apiKey: apiKey, // Use the decoded key
-    authDomain: "visitor-counter-efe06.firebaseapp.com",
-    projectId: "visitor-counter-efe06",
-    storageBucket: "visitor-counter-efe06.firebasestorage.app",
+    authDomain: "Visitor-counter-efe06.firebaseapp.com",
+    projectId: "Visitor-counter-efe06",
+    storageBucket: "Visitor-counter-efe06.appspot.com",
     messagingSenderId: "840136402073",
-    appId: "1:840136402073:web:bcd0bbce9b85e30f5b0408",
-    measurementId: "G-WCV8LCS2N5"
+    appId: "1:840136402073:web:bcc0bbcc9b85c30f5b0408",
+    measurementId: "G-WCV8LC52NS"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -42,13 +42,12 @@ function updateVisitorCount() {
     docRef.get().then((doc) => {
         let count = doc.exists ? doc.data().count : 0;
         count++;
-
         docRef.set({ count })
             .then(() => {
                 document.getElementById('visitor-count').textContent = count;
             })
             .catch((error) => console.error("Error updating count:", error));
-    });
+    }).catch((error) => console.error("Error getting document:", error));
 }
 
 updateVisitorCount();
