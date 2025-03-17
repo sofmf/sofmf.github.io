@@ -1,6 +1,4 @@
-
-
-// Display current date and time
+// Function to update the date and time
 function updateDateTime() {
     const now = new Date();
     const day = String(now.getDate()).padStart(2, '0');
@@ -14,6 +12,8 @@ function updateDateTime() {
     document.getElementById('datetime').textContent = europeanFormat;
 }
 
+// Update the date and time every second
 setInterval(updateDateTime, 1000);
-updateDateTime(); // Run immediately
 
+// Initial call to display the time immediately
+updateDateTime();
